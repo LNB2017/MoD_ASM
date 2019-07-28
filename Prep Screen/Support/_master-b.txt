@@ -1,0 +1,312 @@
+//For Support stuff
+
+#include _Support_Table.txt"
+
+ALIGN 4
+Unlock_Supports_For_This_Chapter_ASMC:
+#incbin "Unlock_Supports_For_This_Chapter_ASMC.dmp"
+POIN UnlockCharactersSupports
+
+ALIGN 4
+//use SETVAL 1 (character_1|character_2<<0x8|rank_points<<0x10) first
+Set_Support_Level_ASMC:
+#incbin "Set_Support_Level_ASMC.dmp"
+WORD Setval_Loc
+POIN Get_Supporter_Data|1 Set_Support_By_Index|1
+
+ALIGN 4
+Support_Proc:
+_6C_LABEL(0)
+_6C_CALL_ROUTINE(0x7B89D) //fade
+_6C_YIELD
+_6C_LABEL(4)
+_6C_CALL_ROUTINE(Initialize_Proc_Parameters|1)
+_6C_CALL_ROUTINE(Set_Up_Support_Screen|1)
+_6C_LABEL(1)
+_6C_CALL_ROUTINE(Make_Unit_Pane|1)
+_6C_LABEL(2)
+_6C_CALL_ROUTINE(Make_Support_Pane|1)
+_6C_LABEL(3)
+_6C_CALL_ROUTINE(Which_Loop_To_Use|1)	//basically a hacky workaround to get back to the support pane after playing a support
+_6C_LOOP_ROUTINE(Unit_Select_Loop_Routine|1)
+_6C_LABEL(5)
+_6C_CALL_ROUTINE(Make_Support_Pane|1)
+_6C_LABEL(0x1A)		//A press on unit screen goes here
+_6C_LOOP_ROUTINE(Support_Select_Loop_Routine|1)
+_6C_LABEL(0x2A)		//A press on support screen goes here
+//_6C_CALL_ROUTINE(0x7B89D) //fade
+//_6C_YIELD
+_6C_CALL_ROUTINE(Execute_Support|1)
+_6C_YIELD
+_6C_CALL_ROUTINE(Display_Popup|1)
+_6C_YIELD
+_6C_CALL_ROUTINE(Return_To_Support_Screen|1)
+_6C_LABEL(0x1B) //B press to return to prep screen
+_6C_CALL_ROUTINE(0x7B89D) //fade
+_6C_YIELD
+_6C_END
+
+ALIGN 4
+Create_Support_Proc:
+#incbin "Create_Support_Proc.dmp"
+POIN Support_Proc
+
+ALIGN 4
+Initialize_Proc_Parameters:
+#incbin "Initialize_Proc_Parameters.dmp"
+POIN Reset_Support_Pane_Parameters
+
+ALIGN 4
+Reset_Support_Pane_Parameters:
+#incbin "Reset_Support_Pane_Parameters.dmp"
+
+ALIGN 4
+Set_Up_Support_Screen:
+#incbin "Set_Up_Support_Screen.dmp"
+POIN Support_BG_TSA
+POIN Create_Background
+POIN Support_Banner_Graphics Support_Banner_Palette
+
+ALIGN 4
+Unit_Select_Loop_Routine:
+#incbin "Unit_Select_Loop_Routine.dmp"
+POIN Display_Sprites LeftRightKeyPress UpDownKeyPress Draw_Unit_Row Clear_Row Start_R_Bubble_Support_Screen Check_To_Close_Affinity_Bubble
+
+ALIGN 4
+LeftRightKeyPress:
+#incbin "LeftRightKeyPress.dmp"
+POIN Get_Pairing_Type
+
+ALIGN 4
+UpDownKeyPress:
+#incbin "UpDownKeyPress.dmp"
+
+ALIGN 4
+Clear_Row:
+#incbin "Clear_Row.dmp"
+
+ALIGN 4
+Make_Unit_Pane:
+#incbin "Make_Unit_Pane.dmp"
+POIN Draw_Unit_Row
+
+ALIGN 4
+Draw_Unit_Row:
+#incbin "Draw_Unit_Row.dmp"
+POIN DoesUnitHaveAnySupports
+
+ALIGN 4
+DoesUnitHaveAnySupports:
+#incbin "DoesUnitHaveAnySupports.dmp"
+
+ALIGN 4
+Make_Support_Pane:
+#incbin "Make_Support_Pane.dmp"
+POIN Draw_Support_Row
+
+ALIGN 4
+Draw_Support_Row:
+#incbin "Draw_Support_Row.dmp"
+POIN Get_Supporter_Data Get_Support_By_Index Get_Pairing_Type
+WORD 0x6C4 //DashesTextID, right now, I think this says Axereaver
+
+ALIGN 4
+Get_Supporter_Data:
+#incbin "Get_Supporter_Data.dmp"
+
+ALIGN 4
+Get_Pairing_Type:
+#incbin "Get_Pairing_Type.dmp"
+POIN Get_Supporter_Data Inheritance_Skill_Getter
+
+ALIGN 4
+Display_Sprites:
+#incbin "Display_Sprites.dmp"
+
+ALIGN 4
+Get_Support_By_Index:
+#incbin "Get_Support_By_Index.dmp"
+
+ALIGN 4
+Set_Support_By_Index:
+#incbin "Set_Support_By_Index.dmp"
+
+//ALIGN 4
+//Increase_Support: //NOT FINISHED
+//#incbin "Increase_Support.dmp"
+//POIN Get_Support_By_Index|1 Set_Support_By_Index|1
+
+ALIGN 4
+Support_Select_Loop_Routine:
+#incbin "Support_Select_Loop_Routine.dmp"
+POIN Display_Sprites LeftRightKeyPress UpDownKeyPress Draw_Support_Row Clear_Row Reset_Support_Pane_Parameters Get_Pairing_Type Get_Support_By_Index Start_R_Bubble_Support_Screen Check_To_Close_Affinity_Bubble
+
+ALIGN 4
+Execute_Support:
+#incbin "Execute_Support.dmp"
+POIN Get_Support_By_Index Set_Support_By_Index UnlockCharactersSupports Get_Supporter_Data
+WORD SupportViewedEventID
+
+ALIGN 4
+UnlockCharactersSupports:
+#incbin "UnlockCharactersSupports.dmp"
+POIN Get_Support_By_Index Get_Supporter_Data Set_Support_By_Index
+
+ALIGN 4
+Display_Popup:
+#incbin "Display_Popup.dmp"
+
+ALIGN 4
+Return_To_Support_Screen:
+#incbin "Return_To_Support_Screen.dmp"
+WORD SupportViewedEventID
+
+ALIGN 4
+Which_Loop_To_Use:
+#incbin "Which_Loop_To_Use.dmp"
+
+ALIGN 4
+Initialize_Support_Levels:
+#incbin "Initialize_Support_Levels.dmp"
+POIN Get_Supporter_Data Set_Support_By_Index
+
+ALIGN 4
+Wipe_Supports_After_Dying:
+#incbin "Wipe_Supports_After_Dying.dmp"
+POIN Set_Support_By_Index
+
+ALIGN 4
+Start_R_Bubble_Support_Screen:
+#incbin "Start_R_Bubble_Support_Screen.dmp"
+POIN Create_R_Bubble Get_Supporter_Data
+
+ALIGN 4
+Check_To_Close_Affinity_Bubble:
+#incbin "Check_To_Close_Affinity_Bubble.dmp"
+POIN Fill_In_Affinity_Bubble_Proc
+
+ALIGN 4
+Create_R_Bubble:
+#incbin "Create_R_Bubble.dmp"
+POIN Fill_In_Affinity_Bubble_Proc
+
+ALIGN 4
+Fill_In_Affinity_Bubble_Proc:
+_6C_SLEEP(6)
+_6C_CALL_ROUTINE(Fill_In_Bubble|1)
+_6C_END
+
+ALIGN 4
+Fill_In_Bubble:
+#incbin "Fill_In_Bubble.dmp"
+POIN Affinity_Name_Text Rank_Letter_Text
+
+ALIGN 4
+Affinity_Name_Text:
+POIN Affin_None Affin_Fire Affin_Thunder Affin_Wind Affin_Ice Affin_Dark Affin_Light Affin_Anima
+Affin_None:
+BYTE 0 0
+Affin_Fire:
+BYTE $82 $A9 $82 $E0 $82 $ED $82 $DC 0 0
+Affin_Thunder:
+BYTE $82 $C6 $82 $DF $82 $AA $82 $E8 $82 $D9 $82 $DC $82 $ED 0 0
+Affin_Wind:
+BYTE $82 $CA $82 $E0 $82 $E8 $82 $D9 0 0
+Affin_Ice:
+BYTE $82 $AF $82 $D6 $82 $DC 0 0
+Affin_Dark:
+BYTE $82 $A6 $82 $D0 $82 $ED $82 $E4 0 0
+Affin_Light:
+BYTE $82 $B5 $82 $E0 $82 $DE $82 $DF $82 $F1 0 0
+Affin_Anima:
+BYTE $82 $A0 $82 $E8 $82 $E0 $82 $E7 $82 $D0 0 0
+
+ALIGN 4
+Rank_Letter_Text:
+POIN No_Rank_Text C_Rank_Text B_Rank_Text A_Rank_Text APlus_Rank_Text S_Rank_Text
+No_Rank_Text:
+BYTE $82 $CF $82 $CF 0 0
+C_Rank_Text:
+BYTE $82 $A4 0 0
+B_Rank_Text:
+BYTE $82 $A2 0 0
+A_Rank_Text:
+BYTE $82 $A0 0 0
+APlus_Rank_Text:
+BYTE $82 $A0 $82 $D7 0 0
+S_Rank_Text:
+BYTE $82 $C4 0 0
+
+ALIGN 4
+Support_Banner_Graphics:
+#incext Png2Dmp "Banner.png" --lz77
+
+ALIGN 4
+Support_Banner_Palette:
+#incext Png2Dmp "Banner.png" --palette-only
+
+ALIGN 4
+Support_BG_TSA:
+BYTE 30 16 //length, height
+SHORT $01 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $60 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $03
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $62 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $62 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $07 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $61 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $09
+
+/*
+Drawing a glyph in a really dumb way (imo)
+Let bg=0, main/inner color=B, second shade=A, outline=C. The reason for this is because I copied the table corresponding to block 3 (yellow), so that uses A/B/C of the text palette. It'll mostly be B and C; A isn't used very much.
+Each pixel is 4 bits, so there's 2 pixels to a byte. Each glyphs is 2 tiles, a 8x16 image
+1) First, break up your glyph into groups of 4 pixels each. Each group is 16 bits (a short).
+2) For each byte in a group, flip the nibbles. That is to say, if your short is 0xAC 0xCB, change it to 0xCA 0xBC. This is the way the GBA reads graphics in tile RAM, because...I don't actually know, but there's probably a reason.
+3) Search for this short in Glyph_Drawing.dmp. In the previous example, I would look for 0xCABC. If the offset is even, you got the right one; if it's odd, keep looking. When you have the offset, divide it by 2. 0xCABC shows up at 17A; 17A/2 = 8B.
+4) Write this byte down as below. Each row will thus be 2 bytes, followed by 2 zeroes. Each glyph is thus 0x40 bytes (not counting the header). 
+5) Curse whoever came up with this convoluted system instead of just adding the block index to each nibble. Is this even faster?
+Note: I prefer to write it down as WORD 0x(SecondRow)(FirstRow)
+*/
+
+ALIGN 4
+A_Plus_Glyph1:
+POIN 0
+BYTE $82 8 0 0	//Second is width, not sure what first one is, but I don't think it really matters
+WORD 0
+WORD 0
+WORD 0
+WORD 0xC3C0
+WORD 0xB2B0
+WORD 0xAEB0
+WORD 0xB2B0
+WORD 0xFAEC //end of tile 1
+WORD 0x3AEC
+WORD 0x3AEC
+WORD 0x3AAB
+WORD 0xEBFB
+WORD 0xEB3B
+WORD 0xEAEA
+WORD 0x3F3F
+WORD 0
+
+A_Plus_Glyph2:
+POIN 0
+BYTE $82 2 0 0
+WORD 0
+WORD 0
+WORD 0
+WORD 0x0003
+WORD 0x0003
+WORD 0x000E
+WORD 0x000F
+WORD 0x0003 //end of tile 1
+WORD 0 0 0 0 0 0 0 0

@@ -1,0 +1,11 @@
+ALIGN 4
+Create_Background:
+#incbin "Create_Background.dmp"
+
+ALIGN 4
+Return_To_Prep_Screen:
+#incbin "Return_To_Prep_Screen.dmp"
+
+ALIGN 4
+Clear_Layer2_ASMC:
+#incbin "Clear_Layer2_ASMC.dmp"

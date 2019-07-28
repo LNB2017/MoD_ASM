@@ -1,0 +1,42 @@
+//Get number of support partners
+ORG $22A8C
+SHORT 0x7800 //ldrb r0,[r0]
+
+//Support usability
+//ORG $20064
+//#incbin "Support_Usability.dmp"
+//POIN Is_Base_Map|1
+
+//Given r0=unit pointer and r1=support index, returns character id of support
+ORG $22A9A
+SHORT 0xD004 0x3004 0x2218 0x4351 0x1840 0x7800 0x4770 //beq GoBack; add r0,#4; mov r2,#0x18; mul r1,r2; add r0,r1; ldrb r0,[r0]; bx r14
+
+//Given r0=unit pointer and r1=support index, returns rank (0=none, 1=C, 2=B, 3=A, 4=S/A+)
+ORG $22AF0
+#incbin "Get_Support_Rank.dmp"
+POIN Get_Support_By_Index|1
+
+//Given r0=unit pointer and r1=support index, returns true if unit can support with the character at that index
+ORG $22BA4
+#incbin "Can_Unit_Support.dmp"
+POIN Get_Support_By_Index|1
+
+//Increase support
+//ORG $22B8C
+//jumpToHack(Increase_Support)
+
+//Initialize support level when creating a unit
+ORG $17798
+jumpToHack(Initialize_Support_Levels)
+
+//Wipe support level when a unit dies (from both them and their partner)
+ORG $22C8E
+SHORT 0x46C0
+callHack_r3(Wipe_Supports_After_Dying)
+SHORT 0x46C0 0x46C0 0x46C0
+
+//Insert the A+ glyph
+ORG $5A8204+(4*$2B)
+POIN A_Plus_Glyph1
+ORG $5A8204+(4*$2C)
+POIN A_Plus_Glyph2

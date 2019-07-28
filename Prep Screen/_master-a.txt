@@ -1,0 +1,64 @@
+#include "Support/_master-a.txt"
+
+ORG $79424
+#incbin "SetUpPrepScreenOptionsTable.dmp"
+POIN PrepScreenOptionsTable
+
+ALIGN 4
+#define PrepScreenOption(usability_func, effect_func, display_text, r_button_text, option_order, hide_bool) "POIN usability_func effect_func; SHORT display_text r_button_text; BYTE option_order hide_bool 0 0"
+//ok actually hide_bool isn't a bool, it's a page number rather, 7CD5C passes page number via r1 and displays only options that match
+PrepScreenOptionsTable:
+PrepScreenOption(PickUnitsUsability|1, 0x7C5B9, 0x6AE, 0x659, 0, 0) 	//Pick units
+PrepScreenOption(0, 0x7C7B9, 0x6AF, 0x65A, 1, 0) 						//Trade (the prep screen one)
+PrepScreenOption(0, 0x7CB09, 0x6B7, 0x6A3, 0xA, 0)	 					//Augury/ranking
+PrepScreenOption(TalkUsability|1, TalkSelect|1, 0xA6F, 0x988, 0xB, 0) 	//Talk
+PrepScreenOption(SupportUsability|1, SupportSelect|1, 0xA70, 0xA71, 0xC, 0) //Support
+PrepScreenOption(SaveUsability|1, 0x7CB79, 0x6B1, 0x65C, 3, 0)			//Save
+PrepScreenOption(CheckMapUsability|1, 0x7CBB1, 0x6B2, 0x65D, 4, 0)		//Check Map
+PrepScreenOption(BeginUsability|1, 0x7CBDD, 0x6B0, 0x6F1, 0xC, 0)		//Begin (displayed on the Link Arena team creation menu)
+PrepScreenOption(FightUsability|1, 0x7CBDD, 0x6BA, 0x65E, 0xC, 0)		//Fight! (normally displayed
+PrepScreenOption(SortieUsability|1, SortieSelect|1, 0x6B0, 0x6F1, 0xC, 0)	//Sortie
+PrepScreenOption(Trade2Usability|1, 0x7C885, 0x6B3, 0x65F, 5, 1)		//Trade (on the Trade menu)
+PrepScreenOption(0, 0x7C97D, 0x6B4, 0x660, 6, 1)						//Discard
+PrepScreenOption(0, 0x7C9F5, 0x6B5, 0x661, 7, 1)						//Storage
+PrepScreenOption(0, 0x7CA49, 0x6B6, 0x662, 8, 1)						//Item
+PrepScreenOption(ShopUsability|1, 0x7CA9D, 0x6B9, 0x663, 9, 1)			//Shop
+WORD 0xFFFFFFFF	//terminator
+
+ORG $3A600
+POIN Prep_Screen_Proc
+ORG $7B6CC
+POIN Prep_Screen_Proc
+ORG $7B6E8
+POIN Prep_Screen_Proc
+
+//New ENDA, supposed to make the proc that shows the map not appear when on prep screen
+ORG $E288
+#incbin "New_ENDA.dmp"
+
+//part of a new REMA, required to make map sprites show up, but it shows the map, so this should fix that (I think it cancels a fade-out)
+ORG $D8AC
+#incbin "New_D8AC.dmp"
+
+//New graphics (just adds some tiles to the blank area)
+ORG $5CB3C4
+POIN Menu_BG1 Menu_BG2 Menu_BG3 Menu_BG4
+
+//Show Campground instead of Battleground on base maps
+ORG $7A3C4
+callHack_r3(Campground)
+
+//Don't display the number of units selected unless it's not a base map (it's hardcoded to the top slot, so Pick Units has to be the first)
+ORG $7A824
+callHack_r3(Pick_Units_Count)
+
+/*
+Table in RAM at 20154A4
+Entries are 0x14 bytes
+r0=routine to call when A is pressed (stored at +0)
+r1=bool to block displaying the option (0=show) (stored at +9)
+r2=text id to display (stored at +0xC)
+r3=palette id or a bool (0=white, 1=gray) (stored at +9)
+sp=r-button text id (stored at +4)
+sp+4=some number (might be order? idk) (stored at +0x10)
+*/

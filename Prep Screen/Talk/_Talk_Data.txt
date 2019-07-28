@@ -1,0 +1,62 @@
+ALIGN 4
+Chapter_Talk_Pointer_Table:
+WORD 0
+WORD 0
+POIN Base1_Talks
+WORD 0
+WORD 0
+
+#define SetTalkEntry(event_id_to_check, event_id_to_set, number_of_stars, name_text_id, event_pointer, char1, char2, char3, char4, char5, char6, char7, char8) "BYTE event_id_to_check event_id_to_set number_of_stars 0; SHORT name_text_id 0; POIN event_pointer; BYTE char1 char2 char3 char4 char5 char6 char7 char8"
+
+Base1_Talks:
+SetTalkEntry(0, 0x10, 1, FatherSonBonding, RoyWoodCh1, 0x0, 0x0, 0, 0, 0, 0, 0, 0) //Roy/Eliwood
+SetTalkEntry(0, 0x11, 1, MasterStudentMaster, RoyErkCh1, 0x0, 0x0, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x12, 1, LilinaRequest, LilinaGwendyCh1, Wolt, Gwendolyn, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x13, 2, GwendolynTraining, LanceGwendolynCh1, Lance, Gwendolyn, Alan, 0, 0, 0, 0, 0)
+
+WORD 0xFFFFFFFF //Terminator
+//14,18,
+
+RoyWoodCh1:
+MUS2 Talking
+FADI 10
+BACG 0x5
+STAL 10
+FADU 10
+TEX1 Ch1HQRoyWood
+REMA
+MUS1 0x22
+ENDA
+
+RoyErkCh1:
+MUS2 CathMusic
+FADI 10
+BACG 0x5
+STAL 10
+FADU 10
+TEX1 Ch1HQRoyErk
+REMA
+MUS1 0x22
+ENDA
+
+LilinaGwendyCh1:
+MUS2 Talking
+FADI 10
+BACG 0x5
+STAL 10
+FADU 10
+TEX1 Ch1HQGwendolynLilina
+REMA
+MUS1 0x22
+ENDA
+
+LanceGwendolynCh1:
+MUS2 CathMusic
+FADI 10
+BACG 0x5
+STAL 10
+FADU 10
+TEX1 Ch1HQLanceGwendolyn
+REMA
+MUS1 0x22
+ENDA

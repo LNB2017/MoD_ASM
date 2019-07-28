@@ -1,0 +1,14 @@
+ORG $942100
+
+#include "EAStdlib.event"
+#include "Extensions/Hack Installation.txt"
+#include "Extensions/6CDefinitions.txt"
+
+PUSH
+
+#include "_master-a.txt"
+
+POP
+
+ALIGN 4
+#include "_master-b.txt"

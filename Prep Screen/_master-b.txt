@@ -1,0 +1,122 @@
+ALIGN 4
+PickUnitsUsability:
+#incbin "PickUnitsUsability.dmp"
+POIN Is_Base_Map
+
+ALIGN 4
+CheckMapUsability:
+#incbin "CheckMapUsability.dmp"
+POIN Is_Base_Map
+
+ALIGN 4
+AuguryUsability:
+#incbin "AuguryUsability.dmp"
+
+ALIGN 4
+Trade2Usability:
+#incbin "Trade2Usability.dmp"
+
+ALIGN 4
+SaveUsability:
+#incbin "SaveUsability.dmp"
+
+ALIGN 4
+ShopUsability:
+#incbin "ShopUsability.dmp"
+
+ALIGN 4
+BeginUsability:
+#incbin "BeginUsability.dmp"
+POIN Is_Base_Map
+
+ALIGN 4
+FightUsability:
+#incbin "FightUsability.dmp"
+POIN Is_Base_Map
+
+ALIGN 4
+TalkUsability:
+#incbin "TalkUsability.dmp"
+POIN Count_Talks_And_Make_List Is_Base_Map
+
+ALIGN 4
+TalkSelect:
+#incbin "TalkSelect.dmp"
+
+ALIGN 4
+SupportUsability:
+#incbin "SupportUsability.dmp"
+POIN Is_Base_Map
+
+ALIGN 4 
+SupportSelect:
+#incbin "SupportSelect.dmp"
+
+ALIGN 4
+SortieUsability:
+#incbin "SortieUsability.dmp"
+POIN Is_Base_Map
+
+ALIGN 4
+SortieSelect:
+#incbin "SortieSelect.dmp"
+
+ALIGN 4
+Sortie_Call_End_Events:
+#incbin "Sortie_Call_End_Events.dmp"
+
+ALIGN 4
+Prep_Screen_Proc:
+#incbin "Prep_Screen_Proc.dmp"
+_6C_GOTO(0x20) //goto end
+//Talk
+_6C_LABEL(0x10)
+_6C_CALL_ROUTINE(Create_Talk_Proc|1) //Blocked from here until B is pressed
+_6C_YIELD //ensures the block takes effect
+_6C_CALL_ROUTINE(Return_To_Prep_Screen|1)
+_6C_GOTO(1)
+//Support
+_6C_LABEL(0x11)
+_6C_CALL_ROUTINE(Create_Support_Proc|1)
+_6C_YIELD
+_6C_CALL_ROUTINE(Return_To_Prep_Screen|1)
+_6C_GOTO(1)
+//Sortie
+_6C_LABEL(0x12)
+_6C_CALL_ROUTINE(0x1598D)	//UnblockGameLogic (If I don't put this here, bad things happen when starting the next chapter)
+_6C_CALL_ROUTINE(Sortie_Call_End_Events|1)
+_6C_YIELD
+_6C_CALL_ROUTINE(0x608D5)
+_6C_GOTO(0x20)
+//END
+_6C_LABEL(0x20)
+_6C_END
+
+ALIGN 4
+Menu_BG1:
+#incext Png2Dmp "BG1.png" --lz77
+Menu_BG2:
+#incext Png2Dmp "BG2.png" --lz77
+Menu_BG3:
+#incext Png2Dmp "BG3.png" --lz77
+Menu_BG4:
+#incext Png2Dmp "BG4.png" --lz77
+
+ALIGN 4
+Campground:
+#incbin "Campground.dmp"
+POIN Is_Base_Map
+POIN Campground_Graphics
+
+ALIGN 4
+Pick_Units_Count:
+#incbin "Pick_Units_Count.dmp"
+POIN Is_Base_Map
+
+ALIGN 4
+Campground_Graphics:
+#incext Png2Dmp "Campground.png" --lz77
+
+#include "Shared Functions/_master-b.txt"
+#include "Talk/_master-b.txt"
+#include "Support/_master-b.txt"

@@ -1,0 +1,103 @@
+//For Talk stuff
+
+//ALIGN 4
+//Talk_Effect:
+//#incbin "Talk_Effect.dmp"
+//POIN Talk_Proc
+
+ALIGN 4
+Talk_Proc:
+_6C_LABEL(0)
+_6C_CALL_ROUTINE(0x7B89D) //fade
+_6C_YIELD
+_6C_LABEL(0x5)
+_6C_CALL_ROUTINE(Set_Up_Talk|1)
+_6C_LOOP_ROUTINE(Keypress_Check|1)
+//A press
+_6C_LABEL(0xA)
+_6C_CALL_ROUTINE(Play_Talk|1)
+_6C_YIELD
+_6C_CALL_ROUTINE(Post_Talk_Routine|1)
+//B press
+_6C_LABEL(0xB)
+_6C_CALL_ROUTINE(0x7B89D) //fade
+_6C_YIELD
+_6C_END
+
+ALIGN 4
+Create_Talk_Proc:
+#incbin "Create_Talk_Proc.dmp"
+POIN Talk_Proc
+
+ALIGN 4
+Set_Up_Talk:
+#incbin "Set_Up_Talk.dmp"
+POIN Talk_BG_TSA
+POIN Create_Background
+POIN Talk_Banner_Graphics Talk_Banner_Palette Star_Graphics Star_Palette
+POIN Count_Talks_And_Make_List Draw_Talk_Entry
+
+ALIGN 4
+Keypress_Check:
+#incbin "Keypress_Check.dmp"
+POIN Draw_Talk_Entry
+
+ALIGN 4
+Count_Talks_And_Make_List:
+#incbin "Count_Talks_And_Make_List.dmp"
+POIN Chapter_Talk_Pointer_Table
+
+ALIGN 4
+Get_Talk_Entry:
+#incbin "Get_Talk_Entry.dmp"
+
+ALIGN 4
+Draw_Talk_Entry:
+#incbin "Draw_Talk_Entry.dmp"
+POIN Get_Talk_Entry
+
+ALIGN 4
+Play_Talk:
+#incbin "Play_Talk.dmp"
+POIN Get_Talk_Entry
+
+ALIGN 4
+Post_Talk_Routine:
+#incbin "Post_Talk_Routine.dmp"
+POIN Count_Talks_And_Make_List
+
+ALIGN 4
+Talk_Banner_Graphics:
+#incext Png2Dmp "Banner-New.png" --lz77
+
+ALIGN 4
+Talk_Banner_Palette:
+#incext Png2Dmp "Banner-New.png" --palette-only
+
+ALIGN 4
+Star_Graphics:
+#incext Png2Dmp "star.png" --lz77
+
+ALIGN 4
+Star_Palette:
+#incext Png2Dmp "star.png" --palette-only
+
+ALIGN 4
+Talk_BG_TSA:
+BYTE 26 14 //length, height
+SHORT $01 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $02 $03
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $04 $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $5B $5C $06
+SHORT $04 $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $5D $5E $06
+SHORT $07 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $08 $09
+
+#include "_Talk_Data.txt"
