@@ -8,13 +8,6 @@ Unlock_Supports_For_This_Chapter_ASMC:
 POIN UnlockCharactersSupports
 
 ALIGN 4
-//use SETVAL 1 (character_1|character_2<<0x8|rank_points<<0x10) first
-Set_Support_Level_ASMC:
-#incbin "Set_Support_Level_ASMC.dmp"
-WORD Setval_Loc
-POIN Get_Supporter_Data|1 Set_Support_By_Index|1
-
-ALIGN 4
 Support_Proc:
 _6C_LABEL(0)
 _6C_CALL_ROUTINE(0x7B89D) //fade
@@ -75,7 +68,7 @@ POIN Display_Sprites LeftRightKeyPress UpDownKeyPress Draw_Unit_Row Clear_Row St
 ALIGN 4
 LeftRightKeyPress:
 #incbin "LeftRightKeyPress.dmp"
-POIN Get_Pairing_Type
+POIN Get_Supporter_Data
 
 ALIGN 4
 UpDownKeyPress:
@@ -107,17 +100,12 @@ POIN Draw_Support_Row
 ALIGN 4
 Draw_Support_Row:
 #incbin "Draw_Support_Row.dmp"
-POIN Get_Supporter_Data Get_Support_By_Index Get_Pairing_Type
-WORD 0x6C4 //DashesTextID, right now, I think this says Axereaver
+POIN Get_Supporter_Data Get_Support_By_Index
+WORD 0x743 //DashesTextID, right now, I think this says Axereaver
 
 ALIGN 4
 Get_Supporter_Data:
 #incbin "Get_Supporter_Data.dmp"
-
-ALIGN 4
-Get_Pairing_Type:
-#incbin "Get_Pairing_Type.dmp"
-POIN Get_Supporter_Data Inheritance_Skill_Getter
 
 ALIGN 4
 Display_Sprites:
@@ -139,7 +127,7 @@ Set_Support_By_Index:
 ALIGN 4
 Support_Select_Loop_Routine:
 #incbin "Support_Select_Loop_Routine.dmp"
-POIN Display_Sprites LeftRightKeyPress UpDownKeyPress Draw_Support_Row Clear_Row Reset_Support_Pane_Parameters Get_Pairing_Type Get_Support_By_Index Start_R_Bubble_Support_Screen Check_To_Close_Affinity_Bubble
+POIN Display_Sprites LeftRightKeyPress UpDownKeyPress Draw_Support_Row Clear_Row Reset_Support_Pane_Parameters Get_Supporter_Data Get_Support_By_Index Start_R_Bubble_Support_Screen Check_To_Close_Affinity_Bubble
 
 ALIGN 4
 Execute_Support:

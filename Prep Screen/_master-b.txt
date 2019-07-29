@@ -1,4 +1,9 @@
 ALIGN 4
+//MESSAGE CURRENTOFFSET
+Is_Base_Map:
+SHORT 0x2000 0x4770
+
+ALIGN 4
 PickUnitsUsability:
 #incbin "PickUnitsUsability.dmp"
 POIN Is_Base_Map
@@ -66,6 +71,10 @@ Sortie_Call_End_Events:
 #incbin "Sortie_Call_End_Events.dmp"
 
 ALIGN 4
+AugurySelect:
+#incbin "AugurySelect.dmp"
+
+ALIGN 4
 Prep_Screen_Proc:
 #incbin "Prep_Screen_Proc.dmp"
 _6C_GOTO(0x20) //goto end
@@ -88,6 +97,12 @@ _6C_CALL_ROUTINE(Sortie_Call_End_Events|1)
 _6C_YIELD
 _6C_CALL_ROUTINE(0x608D5)
 _6C_GOTO(0x20)
+//Augury
+_6C_LABEL(0x13)
+//_6C_CALL_ROUTINE(Create_Augury_Proc|1)
+_6C_YIELD
+_6C_CALL_ROUTINE(Return_To_Prep_Screen|1)
+_6C_GOTO(1)
 //END
 _6C_LABEL(0x20)
 _6C_END
@@ -102,21 +117,7 @@ Menu_BG3:
 Menu_BG4:
 #incext Png2Dmp "BG4.png" --lz77
 
-ALIGN 4
-Campground:
-#incbin "Campground.dmp"
-POIN Is_Base_Map
-POIN Campground_Graphics
-
-ALIGN 4
-Pick_Units_Count:
-#incbin "Pick_Units_Count.dmp"
-POIN Is_Base_Map
-
-ALIGN 4
-Campground_Graphics:
-#incext Png2Dmp "Campground.png" --lz77
-
 #include "Shared Functions/_master-b.txt"
 #include "Talk/_master-b.txt"
 #include "Support/_master-b.txt"
+#include "Augury/_master-b.txt"

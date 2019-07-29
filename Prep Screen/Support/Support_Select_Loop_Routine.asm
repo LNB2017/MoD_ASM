@@ -6,8 +6,8 @@
 .equ Draw_Support_Row, UpDownKeyPress+4
 .equ Clear_Row, Draw_Support_Row+4
 .equ Reset_Support_Pane_Parameters, Clear_Row+4
-.equ Get_Pairing_Type, Reset_Support_Pane_Parameters+4
-.equ Get_Support_By_Index, Get_Pairing_Type+4
+.equ Get_Supporter_Data, Reset_Support_Pane_Parameters+4
+.equ Get_Support_By_Index, Get_Supporter_Data+4
 .equ Start_R_Bubble_Support_Screen, Get_Support_By_Index+4
 .equ Check_To_Close_Affinity_Bubble, Start_R_Bubble_Support_Screen+4
 
@@ -167,8 +167,9 @@ add		r0,r1
 ldr		r0,[r0]
 ldrb	r1,[r4,#Proc_SupportCurrentRow]
 add		r1,r6
-ldr		r3,Get_Pairing_Type
+ldr		r3,Get_Supporter_Data
 _blr	r3
+ldrb	r0,[r0,#2]
 cmp		r0,#0
 bne		Label8			@there's an option, yay!
 ldrb	r0,[r4,#Proc_SupportCurrentColumn]

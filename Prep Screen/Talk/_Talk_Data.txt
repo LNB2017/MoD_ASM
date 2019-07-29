@@ -9,54 +9,39 @@ WORD 0
 #define SetTalkEntry(event_id_to_check, event_id_to_set, number_of_stars, name_text_id, event_pointer, char1, char2, char3, char4, char5, char6, char7, char8) "BYTE event_id_to_check event_id_to_set number_of_stars 0; SHORT name_text_id 0; POIN event_pointer; BYTE char1 char2 char3 char4 char5 char6 char7 char8"
 
 Base1_Talks:
-SetTalkEntry(0, 0x10, 1, FatherSonBonding, RoyWoodCh1, 0x0, 0x0, 0, 0, 0, 0, 0, 0) //Roy/Eliwood
-SetTalkEntry(0, 0x11, 1, MasterStudentMaster, RoyErkCh1, 0x0, 0x0, 0, 0, 0, 0, 0, 0)
-SetTalkEntry(0, 0x12, 1, LilinaRequest, LilinaGwendyCh1, Wolt, Gwendolyn, 0, 0, 0, 0, 0, 0)
-SetTalkEntry(0, 0x13, 2, GwendolynTraining, LanceGwendolynCh1, Lance, Gwendolyn, Alan, 0, 0, 0, 0, 0)
-
+SetTalkEntry(0, 0x10, 2, 0x743, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0) //Roy/Lance
+SetTalkEntry(0, 0x11, 1, 0x733, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x12, 3, 0x746, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x13, 3, 0x74B, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x14, 2, 0x732, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x10, 2, 0x734, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0) //Roy/Lance
+SetTalkEntry(0, 0x11, 1, 0x735, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x12, 3, 0x736, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x13, 3, 0x737, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x14, 2, 0x738, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x10, 2, 0x739, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0) //Roy/Lance
+SetTalkEntry(0, 0x11, 1, 0x73A, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x12, 3, 0x73B, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x13, 3, 0x73C, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x14, 2, 0x73D, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x10, 2, 0x73E, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0) //Roy/Lance
+SetTalkEntry(0, 0x11, 1, 0x73F, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x12, 3, 0x740, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x13, 3, 0x741, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x14, 2, 0x742, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x10, 2, 0x744, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0) //Roy/Lance
+SetTalkEntry(0, 0x11, 1, 0x745, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x12, 3, 0x747, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x13, 3, 0x748, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
+SetTalkEntry(0, 0x14, 2, 0x749, TestEvent, 0x01, 0x1C, 0, 0, 0, 0, 0, 0)
 WORD 0xFFFFFFFF //Terminator
-//14,18,
 
-RoyWoodCh1:
-MUS2 Talking
+TestEvent:
 FADI 10
-BACG 0x5
+BACG 0x7
 STAL 10
 FADU 10
-TEX1 Ch1HQRoyWood
+TEX1 1
 REMA
-MUS1 0x22
 ENDA
 
-RoyErkCh1:
-MUS2 CathMusic
-FADI 10
-BACG 0x5
-STAL 10
-FADU 10
-TEX1 Ch1HQRoyErk
-REMA
-MUS1 0x22
-ENDA
-
-LilinaGwendyCh1:
-MUS2 Talking
-FADI 10
-BACG 0x5
-STAL 10
-FADU 10
-TEX1 Ch1HQGwendolynLilina
-REMA
-MUS1 0x22
-ENDA
-
-LanceGwendolynCh1:
-MUS2 CathMusic
-FADI 10
-BACG 0x5
-STAL 10
-FADU 10
-TEX1 Ch1HQLanceGwendolyn
-REMA
-MUS1 0x22
-ENDA

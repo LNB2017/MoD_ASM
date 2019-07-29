@@ -4,8 +4,7 @@
 @r0=proc, r1=unit number
 
 .equ Get_Support_By_Index, Get_Supporter_Data+4
-.equ Get_Pairing_Type, Get_Support_By_Index+4
-.equ DashesTextID, Get_Pairing_Type+4
+.equ DashesTextID, Get_Support_By_Index+4
 
 push	{r4-r7,r14}
 add		sp,#-0x1C
@@ -44,10 +43,7 @@ mov		r1,r6
 ldr		r3,Get_Supporter_Data
 _blr	r3
 str		r0,[sp,#0x10]
-mov		r0,r7
-mov		r1,r6
-ldr		r3,Get_Pairing_Type
-_blr	r3
+ldrb	r0,[r0,#2]	@0 for none, 1 for A+, 2 for S
 cmp		r0,#1
 beq		APlusSupport
 cmp		r0,#2
@@ -127,17 +123,11 @@ ldr		r0,[sp,#0x10]	@support data
 ldrb	r0,[r0]			@char id
 _blh	GetUnitByCharID
 cmp		r0,#0
-bne		CheckIfDead
-ldr		r0,[sp,#0x14]
-cmp		r0,#0
-bne		GetActualName	@if you have a support of some kind, then show the name even if the unit doesn't exist yet
-b		ShowDashedName
-CheckIfDead:
+beq		ShowDashedName
 ldrh	r1,[r0,#0xC]
 mov		r2,#4
 tst		r1,r2
 bne		ShowDashedName
-GetActualName:
 ldr		r0,[sp,#0x10]	@support data
 ldrb	r0,[r0]			@char id
 _blh	GetCharacterData

@@ -69,8 +69,9 @@ ldr		r1,=UnitListLocation
 add		r0,r1
 ldr		r0,[r0]
 ldrb	r1,[r4,#Proc_SupportCurrentRow]
-ldr		r3,Get_Pairing_Type
+ldr		r3,Get_Supporter_Data
 _blr	r3
+ldrb	r0,[r0,#2]
 cmp		r0,#0
 beq		RetZero
 b		RetOne
@@ -91,5 +92,5 @@ pop		{r1}
 bx		r1
 
 .ltorg
-Get_Pairing_Type:
+Get_Supporter_Data:
 @

@@ -70,10 +70,6 @@ ldrb	r1,[r4,#Proc_SupportCurrentRow]
 ldr		r3,Get_Supporter_Data
 _blr	r3
 ldrb	r0,[r0,#2]		@0 for none, 1 for A+, 2 for S
-cmp		r0,#3
-bne		Label5
-mov		r0,#2			@if we got here, then that means there must be an S support (this is Hector/Lyn or Eliwood/Lyn)
-Label5:
 add		r0,#3
 Label4:
 mov		r1,r0

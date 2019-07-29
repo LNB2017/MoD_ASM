@@ -10,9 +10,10 @@ ALIGN 4
 PrepScreenOptionsTable:
 PrepScreenOption(PickUnitsUsability|1, 0x7C5B9, 0x6AE, 0x659, 0, 0) 	//Pick units
 PrepScreenOption(0, 0x7C7B9, 0x6AF, 0x65A, 1, 0) 						//Trade (the prep screen one)
-PrepScreenOption(0, 0x7CB09, 0x6B7, 0x6A3, 0xA, 0)	 					//Augury/ranking
-PrepScreenOption(TalkUsability|1, TalkSelect|1, 0xA6F, 0x988, 0xB, 0) 	//Talk
-PrepScreenOption(SupportUsability|1, SupportSelect|1, 0xA70, 0xA71, 0xC, 0) //Support
+PrepScreenOption(0, AugurySelect|1, 0x6B7, 0x6A3, 0xA, 0)	 					//Augury/ranking
+//PrepScreenOption(0, 0x7CB09, 0x6B7, 0x6A3, 0xA, 0)	 					//Augury/ranking
+PrepScreenOption(TalkUsability|1, TalkSelect|1, 0x6AF, 0x65A, 0xB, 0) 	//Talk
+PrepScreenOption(SupportUsability|1, SupportSelect|1, 0x6AF, 0x65A, 0xC, 0) //Support
 PrepScreenOption(SaveUsability|1, 0x7CB79, 0x6B1, 0x65C, 3, 0)			//Save
 PrepScreenOption(CheckMapUsability|1, 0x7CBB1, 0x6B2, 0x65D, 4, 0)		//Check Map
 PrepScreenOption(BeginUsability|1, 0x7CBDD, 0x6B0, 0x6F1, 0xC, 0)		//Begin (displayed on the Link Arena team creation menu)
@@ -43,14 +44,6 @@ ORG $D8AC
 //New graphics (just adds some tiles to the blank area)
 ORG $5CB3C4
 POIN Menu_BG1 Menu_BG2 Menu_BG3 Menu_BG4
-
-//Show Campground instead of Battleground on base maps
-ORG $7A3C4
-callHack_r3(Campground)
-
-//Don't display the number of units selected unless it's not a base map (it's hardcoded to the top slot, so Pick Units has to be the first)
-ORG $7A824
-callHack_r3(Pick_Units_Count)
 
 /*
 Table in RAM at 20154A4
