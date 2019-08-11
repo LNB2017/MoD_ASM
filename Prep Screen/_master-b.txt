@@ -99,7 +99,7 @@ _6C_CALL_ROUTINE(0x608D5)
 _6C_GOTO(0x20)
 //Augury
 _6C_LABEL(0x13)
-//_6C_CALL_ROUTINE(Create_Augury_Proc|1)
+_6C_CALL_ROUTINE(Create_Augury_Proc|1)
 _6C_YIELD
 _6C_CALL_ROUTINE(Return_To_Prep_Screen|1)
 _6C_GOTO(1)

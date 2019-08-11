@@ -10,9 +10,9 @@ ALIGN 4
 PrepScreenOptionsTable:
 PrepScreenOption(PickUnitsUsability|1, 0x7C5B9, 0x6AE, 0x659, 0, 0) 	//Pick units
 PrepScreenOption(0, 0x7C7B9, 0x6AF, 0x65A, 1, 0) 						//Trade (the prep screen one)
-PrepScreenOption(0, AugurySelect|1, 0x6B7, 0x6A3, 0xA, 0)	 					//Augury/ranking
-//PrepScreenOption(0, 0x7CB09, 0x6B7, 0x6A3, 0xA, 0)	 					//Augury/ranking
-PrepScreenOption(TalkUsability|1, TalkSelect|1, 0x6AF, 0x65A, 0xB, 0) 	//Talk
+PrepScreenOption(0, AugurySelect|1, 0x6B7, 0x6A3, 0xA, 0)	 			//Augury/ranking
+PrepScreenOption(0, 0x7CB09, 0x6B7, 0x6A3, 0xB, 0)	 					//Augury/ranking original
+//PrepScreenOption(TalkUsability|1, TalkSelect|1, 0x6AF, 0x65A, 0xB, 0) 	//Talk
 PrepScreenOption(SupportUsability|1, SupportSelect|1, 0x6AF, 0x65A, 0xC, 0) //Support
 PrepScreenOption(SaveUsability|1, 0x7CB79, 0x6B1, 0x65C, 3, 0)			//Save
 PrepScreenOption(CheckMapUsability|1, 0x7CBB1, 0x6B2, 0x65D, 4, 0)		//Check Map

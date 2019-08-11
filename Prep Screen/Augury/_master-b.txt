@@ -1,16 +1,12 @@
 //For Augury stuff
 
 ALIGN 4
-Augury_Proc: /*
+Augury_Proc:
 _6C_CALL_ROUTINE(0x7B89D) 	//fade
 _6C_YIELD
 _6C_CALL_ROUTINE(Set_Up_Augury_Proc|1)
-_6C_CALL_ROUTINE(Draw_Current_Ranks|1)	//also draws the row and column headers
-_6C_LABEL(0x1)
-_6C_CALL_ROUTINE(Draw_Goal_Ranks|1)
-_6C_LABEL(0x2)
-_6C_CALL_ROUTINE(Draw_Help_Text|1)		//line of text at bottom of screen
-_6C_LOOP_ROUTINE(Keypress_Check|1)
+//_6C_CALL_ROUTINE(Draw_Augury_Text|1)	//also draws the row and column headers
+_6C_LOOP_ROUTINE(Keypress_Check_And_Sprites|1)
 //B press
 _6C_LABEL(0xB)
 _6C_CALL_ROUTINE(0x7B89D) //fade
@@ -25,4 +21,17 @@ POIN Augury_Proc
 ALIGN 4
 Set_Up_Augury_Proc:
 #incbin "Set_Up_Augury_Proc.dmp"
-*/
+POIN Augury_Graphics
+POIN Augury_Palette
+
+ALIGN 4
+Keypress_Check_And_Sprites:
+SHORT 0x4770
+
+ALIGN 4
+Augury_Graphics:
+#incext Png2Dmp "AuguryObjects.png" --lz77
+
+ALIGN 4
+Augury_Palette:
+#incext Png2Dmp "AuguryObjects.png" --palette-only
