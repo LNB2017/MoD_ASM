@@ -8,9 +8,9 @@ _blh	EndProc
 ldr		r0,Augury_Proc
 mov		r1,r4
 _blh	StartBlockingProc
-mov		r1,#0
+@mov		r1,#0
 @strh	r1,[r0,#Proc_DoNotResetParametersBool]
-@mov		r0,r4
+mov		r0,r4
 _blh	0x807ACE8		@blocks sprites? idk
 pop		{r4}
 pop		{r0}
