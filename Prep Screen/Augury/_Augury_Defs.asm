@@ -30,4 +30,4 @@
 @graphics
 .equ Augury_Graphics_Palette_Bank, 2        @foreground palette id
 .equ Augury_Graphics_Tile_Number, 0x2E0    @in object tile memory
-
+.equ BG_Layer_Palette, 3

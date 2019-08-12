@@ -21,13 +21,13 @@ _blh    Decompress
 
 @red background palette
 ldr     r0,=#0x833C01C      
-mov     r1,#(BG_Layer_Palette<<5) @*0x20  
+mov     r1,#(Augury_BG_Layer_Palette<<5) @*0x20  
 mov     r2,#0x20
 _blh    CopyToPaletteBuffer
 
 @red background construction
 ldr     r0,=BGLayer3
-mov     r1,#(BG_Layer_Palette*<<4) @*0x10
+mov     r1,#(Augury_BG_Layer_Palette*<<4) @*0x10
 lsl     r1,#8
 _blh    #0x8090854      @function that draws the augury background on given layer r0 with palette r1
 
