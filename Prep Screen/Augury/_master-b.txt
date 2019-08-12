@@ -2,14 +2,14 @@
 
 ALIGN 4
 Augury_Proc:
-_6C_CALL_ROUTINE(0x7B89D) 	//fade
+//_6C_CALL_ROUTINE(0x7B89D) 	//fade
 _6C_YIELD
 _6C_CALL_ROUTINE(Set_Up_Augury_Proc|1)
 //_6C_CALL_ROUTINE(Draw_Augury_Text|1)	//also draws the row and column headers
 _6C_LOOP_ROUTINE(Keypress_Check_And_Sprites|1)
 //B press
 _6C_LABEL(0xB)
-//_6C_CALL_ROUTINE(0x7B89D) //fade
+_6C_CALL_ROUTINE(0x7B89D) //fade
 _6C_YIELD
 _6C_END
 
