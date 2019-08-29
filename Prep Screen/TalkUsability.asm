@@ -1,10 +1,10 @@
 .thumb
 .include "_Prep_Screen_Defs.asm"
 
-.equ Is_Base_Map, Count_Talks_And_Make_List+4
+.equ IsCurrentChapterBaseMap, Count_Talks_And_Make_List+4
 
 push	{r14}
-ldr		r3,Is_Base_Map
+ldr		r3,IsCurrentChapterBaseMap
 _blr	r3
 cmp		r0,#0
 beq		RetMinusOne

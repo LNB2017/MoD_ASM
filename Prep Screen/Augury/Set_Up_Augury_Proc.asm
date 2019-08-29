@@ -53,31 +53,24 @@ mov     r2,#0x20    @length
 _blh    CopyToPaletteBuffer
 
 @TODO: Set up black box object transparency
+
 @initialization
 mov     r0,#0
 strb    r0,[r4,#Proc_RowNumber]    @current row for bottow text
-
 mov     r0,#(8*(RowHeader_X+2+1))
 strb    r0,[r4,#Proc_HandY]    @current y pixel position for the hand
-
 _blh    0x808F470 @function that gets the win ratio for combat rank
 strb    r0,[r4,#Proc_CombatRatio]
-
 _blh    0x808F4F0 @function that gets the number of killed units for survival rank
 strb    r0,[r4,#Proc_Losses]
-
 _blh    0x808F30C @function that gets the current turncount for tactics rank
 strh    r0,[r4,#Proc_TurnCount]
-
 _blh    0x808F648 @function that gets the sum of levels in the whole army for power rank
 strh    r0,[r4,#Proc_TotalLevels]
-
 _blh    0x8084D34 @function that gets the sum of experience in the whole army for Exp rank
 str     r0,[r4,#Proc_TotalExp]
-
 _blh    0x8017104 @function that gets the total funds (gold + sale worth of all items) for funds rank 
 str     r0,[r4,#Proc_TotalFunds]
-
 ldr     r5,=gChapterData
 ldrb    r5,[r5,#0xE] @loading current chapter  
 chapterLoop:
@@ -97,7 +90,7 @@ strb    r5,[r4,#Proc_DisplayChapter]
 mov        r0,#0
 _blh    Font_InitDefault
 
-
+@TODO: Load custom text palette
 
 pop     {r4-r7}
 pop     {r1}

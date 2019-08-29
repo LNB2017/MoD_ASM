@@ -8,7 +8,7 @@ mov		r2,#0
 mov		r1,#1
 tst		r0,r1
 beq		RetMinusOne
-ldr		r3,Is_Base_Map
+ldr		r3,IsCurrentChapterBaseMap
 _blr	r3
 cmp		r0,#0
 bne		RetMinusOne
@@ -22,5 +22,5 @@ pop		{r1}
 bx		r1
 
 .align
-Is_Base_Map:
+IsCurrentChapterBaseMap:
 @

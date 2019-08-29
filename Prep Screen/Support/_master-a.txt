@@ -5,7 +5,7 @@ SHORT 0x7800 //ldrb r0,[r0]
 //Support usability
 //ORG $20064
 //#incbin "Support_Usability.dmp"
-//POIN Is_Base_Map|1
+//POIN IsCurrentChapterBaseMap|1
 
 //Given r0=unit pointer and r1=support index, returns character id of support
 ORG $22A9A
