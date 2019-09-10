@@ -37,11 +37,11 @@ mov     r0,r5
 ldr     r1,[r6,#4]
 _blh    Text_AppendString
 @call TextDraw with r0=text struct, r1=bg offset to draw to (get x and y from table)
-@layer + y<<6 + x<<2
+@layer + y<<6 + x<<1
 mov     r0,r5
 ldrb    r2,[r6]
 ldrb    r3,[r6,#1]
-lsl     r2,#2
+lsl     r2,#1
 lsl     r3,#6
 ldr     r1,=BGLayer0
 add     r1,r2
