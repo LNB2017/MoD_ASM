@@ -57,7 +57,7 @@ _blh    CopyToPaletteBuffer
 @initialization
 mov     r0,#0
 strb    r0,[r4,#Proc_RowNumber]    @current row for bottow text
-mov     r0,#(8*(RowHeader_X+2+1))
+mov     r0,#(8*(5))
 strb    r0,[r4,#Proc_HandY]    @current y pixel position for the hand
 _blh    0x808F470 @function that gets the win ratio for combat rank
 strb    r0,[r4,#Proc_CombatRatio]
@@ -86,14 +86,12 @@ chapterLoopEnd:
 strb    r5,[r4,#Proc_LatestChapter]
 strb    r5,[r4,#Proc_DisplayChapter]
 
-@initialize font
-mov        r0,#0
-_blh    Font_InitDefault
-
 @TODO: Load custom text palette
 
+@not returning anything, pop and bx r0
 pop     {r4-r7}
-pop     {r1}
-bx      r1
+pop     {r0}
+bx      r0
+
 .ltorg
 Augury_Graphics:

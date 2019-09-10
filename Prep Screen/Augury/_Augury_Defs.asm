@@ -2,6 +2,7 @@
 .include "../_Prep_Screen_Defs.asm"
 
 .equ InitialTextStruct, 	0x200E864	@used by the "main" prep screen
+.equ UnchangingTextStruct, InitialTextStruct+(4*4)
 
 .equ Proc_InitialOffset, 	0x2C		@all the rest of this stuff begins here
 @ bytes - 8 bits
@@ -31,3 +32,14 @@
 .equ Augury_Graphics_Palette_Bank, 2        @foreground palette id
 .equ Augury_Graphics_Tile_Number, 0x2E0    @in object tile memory
 .equ Augury_BG_Layer_Palette, 3
+
+@text coordinates
+.equ RankName_Y, 1
+.equ Curr_Letter_Y, 8
+.equ Curr_Total_Y, 12
+.equ Goal_Total_Y, 18
+.equ Diff_Total_Y, 24
+.equ TopRow_X,  0
+.equ RowHeader_X, 2
+.equ GoalLetter_X, 0
+.equ GoalLetter_Y, Goal_Total_Y+3
