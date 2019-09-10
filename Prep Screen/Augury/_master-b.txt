@@ -60,7 +60,7 @@ Augury_Attributes_Table_Entry(12, 2, 3, 3, TotalTextPtr)
 Augury_Attributes_Table_Entry(18, 2, 3, 2, ChTextPtr)
 Augury_Attributes_Table_Entry(24, 2, 3, 6, DifferenceTextPtr)
 Augury_Attributes_Table_Entry(8, 0, 3, 4, CurrentTextPtr)
-Augury_Attributes_Table_Entry(15, 0, 3, 3, GoalTextPtr)
+Augury_Attributes_Table_Entry(18, 0, 3, 3, GoalTextPtr)
 WORD 0
 
 DescriptionTextPtr:
