@@ -6,7 +6,6 @@ Augury_Proc:
 _6C_YIELD
 _6C_CALL_ROUTINE(Set_Up_Augury_Proc|1)
 _6C_CALL_ROUTINE(Draw_Augury_Text_Layer0|1)	//also draws the row and column headers
-_6C_CALL_ROUTINE(Draw_Augury_Text_Layer2|1) //bottom text
 _6C_LOOP_ROUTINE(Keypress_Check_And_Sprites|1)
 //B press
 _6C_LABEL(0xB)
@@ -23,6 +22,7 @@ ALIGN 4
 Draw_Augury_Text_Layer0:
 #incbin "Draw_Augury_Text_Layer0.dmp"
 POIN Augury_Attributes_Table
+POIN Draw_Augury_Text_Layer2
 
 ALIGN 4
 Draw_Augury_Text_Layer2:

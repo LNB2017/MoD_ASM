@@ -68,4 +68,4 @@ bx      r0
 
 .ltorg
 Augury_Attributes_Table:
-Draw_Augury_Text_Layer2:
+
