@@ -1,5 +1,7 @@
 .thumb
 .include "_Augury_Defs.asm"
+
+.equ Draw_Augury_Text_Layer2, Augury_Attributes_Table+4
 /*
 Text Struct (size 0x08):
     00 | short | start tile index (relative to Font root)
@@ -55,9 +57,15 @@ b       begin_loop
 
 @not returning anything, pop and bx r0
 end_loop:
+@bottom text
+mov r0,r7
+ldr r3,Draw_Augury_Text_Layer2
+_blr r3
+
 pop     {r4-r7}
 pop     {r0}
 bx      r0
 
 .ltorg
 Augury_Attributes_Table:
+Draw_Augury_Text_Layer2:

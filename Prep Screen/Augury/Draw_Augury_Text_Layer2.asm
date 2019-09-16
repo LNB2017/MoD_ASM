@@ -35,7 +35,7 @@ ldr     r1,=(BGLayer2 + 0x40*DescriptionX + 2*DescriptionY)
 _blh    TextDraw
 
 @Updating BGLayer2 on vblank
-ldr     r0,=BGLayer2
+mov     r0,#4
 _blh    EnableBGSyncByMask
 
 pop     {r4-r7}
