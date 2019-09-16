@@ -3,6 +3,7 @@
 
 .equ InitialTextStruct, 	0x200E864	@used by the "main" prep screen
 .equ UnchangingTextStruct, InitialTextStruct+(4*4)
+.equ DescTextStruct, InitialTextStruct+(4*5)
 
 .equ Proc_InitialOffset, 	0x2C		@all the rest of this stuff begins here
 @ bytes - 8 bits
@@ -43,3 +44,4 @@
 .equ RowHeader_X, 2
 .equ GoalLetter_X, 0
 .equ GoalLetter_Y, Goal_Total_Y+3
+
