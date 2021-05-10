@@ -22,7 +22,7 @@ mov     r0,r5
 mov     r1,#DescriptionTileSpace
 _blh    TextInit
 
-@call TextAppend with r0=text struct, r1=pointer to text
+@call Text_AppendString with r0=text struct, r1=pointer to text
 mov     r0,r5
 ldrb    r1,[r4,#Proc_RowNumber]
 lsl     r1,#2 @each entry of the table is 4 bytes
@@ -31,7 +31,7 @@ _blh    Text_AppendString
 
 @Call TextDraw with r0=text struct, r1=bg2 + x<<1 + y<<6*/
 mov     r0,r5
-ldr     r1,=(BGLayer2 + 0x40*DescriptionX + 2*DescriptionY)
+ldr     r1,=(BGLayer2 + 0x40*DescriptionY + 2*DescriptionX)
 _blh    TextDraw
 
 @Updating BGLayer2 on vblank
