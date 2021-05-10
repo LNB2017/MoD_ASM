@@ -17,6 +17,7 @@
 .equ StartProc, 					0x8003A04
 .equ StartBlockingProc, 			0x8003AD8
 .equ FindProc,						0x8003E7C
+.equ BreakProcLoop,					0x8003E60
 .equ PlaySound, 					0x809C860
 .equ FillBgMap, 					0x8001550
 .equ EnableBGSyncByMask, 			0x8000FD4
@@ -34,12 +35,17 @@
 .equ GetStringFromIndex, 			0x8013AD0
 .equ Text_AppendString, 			0x8005DA4
 .equ TextDraw, 						0x8005AB4
+.equ DrawTextInline,				0x8006408
 .equ TextDrawWithParameters,		0x8006454
 .equ NumberDrawWithParameters,		0x8006484
+.equ DrawUiNumber,					0x8006F30
+.equ DrawUiNumberOrDoubleDashes,	0x8006F50
 .equ TextClear, 					0x80058EC
 .equ Text_SetColorId,				0x8005A38
 .equ NewGreenTextColorManager,		0x8006C9C
 .equ DrawIcon,						0x8004CF8
+.equ GetChapterEvents, 				0x802BBA0
+.equ GetChapterData,				0x802BB0C
 .equ SetEventID, 					0x806BA48
 .equ CheckEventID, 					0x806BA5C
 .equ UnsetEventID,					0x806BA74
@@ -72,10 +78,12 @@
 .equ Func_71514,					0x8071514	@sets up the text structs for the bubble and deletes any existing bubble display procs
 .equ Func_70E70, 					0x8070E70	@initializes palette and vram space for the bubble...I think
 .equ CloseRBubble,					0x807089C
-.equ GetChapterEvents, 				0x802BBA0
+.equ LoadObjUIGfx,					0x8015B44
+.equ StartStatScreenHelpTextBubble,	0x807030C
 
 .equ PaletteBuffer, 0x2021708
 .equ gChapterData, 0x202AA48
+.equ gStatScreenStruct, 0x2003108
 .equ Option2Byte, 0x1D
 .set BGLayer0, 0x2021B08
 .set BGLayer1, 0x2022308
@@ -103,7 +111,9 @@
 .equ MenuSelectNoise, 0x6A
 .equ MenuBackingOutNoise, 0x6B
 .equ MenuChangingUnitsNoise, 0x66
+.equ MenuChangingOptionsNoise, 0x67
 .equ MenuInvalidOptionNoise, 0x6C
+.equ PageSwapNoise, 0x6F
 
 .equ WhiteText, 0
 .equ GreyText, 1

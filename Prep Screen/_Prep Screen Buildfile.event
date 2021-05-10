@@ -1,8 +1,9 @@
-ORG $942100
+ORG $CC0000
 
 #include "EAStdlib.event"
 #include "Extensions/Hack Installation.txt"
 #include "Extensions/6CDefinitions.txt"
+#include "_MoD_Definitions.txt"
 
 PUSH
 

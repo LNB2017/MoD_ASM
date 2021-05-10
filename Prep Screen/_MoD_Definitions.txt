@@ -1,0 +1,161 @@
+
+#include "EAStdlib.event"
+#include "Extensions/Hack Installation.txt"
+#include "Extensions/6CDefinitions.txt"
+#include "Tools/Tool Helpers.txt"
+
+
+//Put your custom definitions and macros here
+
+#define FreeSpace 0x920000
+#define Free_Space FreeSpace
+#define IsPointer 0x8000000
+
+//#### text ids ####
+//You'll want to change these to non-used text ids; the current values are placeholders
+#define End_Base_Help_Text 			0xD75	//R-button text for the Sortie command
+#define OM_Animation_Fight_Text_ID	0xD76	//Should say 'Fight'
+#define OM_Save_Auto_Text_ID		0xD77	//Should say 'Auto'
+#define OM_Save_Manual_Desc_Text_ID	0xD78	//Should say 'Only save when game is suspended'
+#define OM_Save_Manual_Text_ID		0xD79	//Should say 'Manual'
+#define OM_Map_Popups_Desc1			0xD7A	//Should say 'Display all map pop-ups'
+#define OM_Map_Popups_1				0xD7B	//Should say 'All'
+#define OM_Map_Popups_Desc2			0xD7C	//Should say 'Display only hp bars and talk bubbles'
+#define OM_Map_Popups_2				0xD7D	//Should say 'HP/Talk'
+#define OM_Map_Popups_Desc3			0xD7E	//Should say 'Don't display any map pop-ups'
+#define OM_Map_Popups_3				0xD7F	//Should say 'None'
+#define DashesTextID				0x6C4
+
+//Reserved temporary event ids (get reset each chapter)
+#define AttuneEventID 0x5B // Dayan's skill
+#define RoyDanceEventID 0x5C
+#define Reinforce_Event_ID 0x5D
+//#define SupportViewedEventID 0x5E
+#define Dont_Show_Statuses_Event_ID 0x5F
+
+//Reserved permanent event ids (don't get reset each chapter)
+#define Eliwood_Waifu_Event_ID1 0x77
+#define Eliwood_Waifu_Event_ID2 0x78	//0 = something went wrong, 1=Lyn/Farina, 2=Fiora/Lyn, 3=Ninian/Florina
+
+#define Fatigue_Cap 30
+
+
+//#### item ids ####
+#define Discipline_ID 	BlueGem
+#define Elite_ID 		RedGem
+#define BEXP_Pot 		Antitoxin			//exp given = item's might
+#define Large_BEXP_Pot 	HolyWater			// ^
+#define Stamina_Drink	StaminaDrink
+#define Bronze_Card		0xC6
+
+
+//#### Exp stuff ####
+//Staff base exp is given by item's weight; if top bit is *not* set, then only base exp will be used (do this for non-targetable staves like Fortify/Torch and those where level wouldn't make sense, like Hammerne or Rescue)
+#define StaffDance_Coeff1 10				//if caster level < target level [base*(1 + ((caster-target)/x))]
+#define StaffDance_Coeff2 20				//if caster level > target level [base*(1 + ((caster-target)/x))]
+#define Dance_Base_Exp 10
+#define Steal_Base_Exp 10
+#define Steal_Exp_Coeff 200					//formula is Steal_Base_Exp + Item's value/Steal_Exp_Coeff
+#define Combat_Chip_Base 10
+#define Combat_Chip_Kill 30
+#define Combat_Coeff1 10					//if exp getter level < opponent's level [(kill or chip base exp)*(1+((exp getter - opponent)/x)) + boss_bonus + thief_bonus + manakete_bonus
+#define Combat_Coeff2 20					//if exp getter level > opponent's level [(kill or chip base exp)*(1+((exp getter - opponent)/x)) + boss_bonus + thief_bonus + manakete_bonus
+#define Thief_Bonus 10
+#define Boss_Bonus 20
+#define Manakete_Bonus 10
+
+//RAM addresses
+#define Setval_Loc 0x3004850	//0x40 bytes before the new event ids location, so hopefully nothing overwrites it here (make sure to update the value in _FE6_ASM_Defs.asm too
+#define BGLayer0 0x2021B08
+#define BGLayer1 0x2022308
+#define BGLayer2 0x2022B08
+#define BGLayer3 0x2023308
+
+//Macros
+#define UnitAction(action_id, action_ptr) "PUSH; ORG Unit_Action_Table + 4*(action_id-1); POIN action_ptr; POP"
+#define Escape(eventID,offset,X,Y)   "LOCA eventID offset [X,Y] _escID"
+//sprite stuff
+#define _8x8(x_coord, y_coord, h_flip, v_flip, tile_num) "SHORT y_coord x_coord|(h_flip<<0xC)|(v_flip<<0xD) tile_num"
+#define _64x32(x_coord, y_coord, h_flip, v_flip, tile_num) "_8x8(x_coord|0xC000, y_coord|0x4000, h_flip, v_flip, tile_num)"
+#define _32x32(x_coord, y_coord, h_flip, v_flip, tile_num) "_8x8(x_coord|0x8000, y_coord|0x0000, h_flip, v_flip, tile_num)"
+#define _16x32(x_coord, y_coord, h_flip, v_flip, tile_num) "_8x8(x_coord|0x8000, y_coord|0x8000, h_flip, v_flip, tile_num)"
+#define _32x8(x_coord, y_coord, h_flip, v_flip, tile_num) "_8x8(x_coord|0x4000, y_coord|0x4000, h_flip, v_flip, tile_num)"
+#define _8x32(x_coord, y_coord, h_flip, v_flip, tile_num) "_8x8(x_coord|0x4000, y_coord|0x8000, h_flip, v_flip, tile_num)"
+
+//Event aliases
+#define MUS1 MUSC
+#define MUS2 MUSS
+#define MUS3 MUSM
+#define HALFWORD SHORT
+
+
+// Skill definitions
+#define InspiringLeaderID 0x01
+#define GuardianID 0x02
+#define FierceRivalID 0x03
+#define DiligentRivalID 0x04
+#define SecondStrikeID 0x05
+#define GutsID 0x06
+#define EtrurianAgentID 0x07
+#define StaffSavantID 0x08
+#define BattlefieldTacticsID 0x09
+#define BloodthirstID 0x0A
+#define IronbodiedID 0x0B
+#define SaviorID 0x0C
+#define ToweringKnightID 0x0D
+#define SunburstID 0x0E
+#define ShadowstepID 0x0F
+#define NobilityID 0x10
+#define MurderousID 0x11
+#define FalseChivalryID 0x12
+#define BodyguardID 0x13
+#define SlipstreamID 0x14
+#define FutureSovereignID 0x15
+#define AggressiveKnightID 0x16
+#define PassiveKnightID 0x17
+#define MoonlightPrincessID 0x18
+#define AcrobatID 0x19
+#define WaryFighterID 0x1A
+#define OpeningSlashID 0x1B
+#define DirtyDeedsID 0x1C
+#define CrowdFighterID 0x1D
+#define CantoPlusID 0x1E
+#define ArcheryGeneralID 0x1F
+#define DartingBlowID 0x20
+#define SwordDanceID 0x21
+#define RebelliousSoulID 0x22
+#define BasicTrainingID 0x23
+#define CompanionshipID 0x24
+#define HotbloodedID 0x25
+#define CrescendoID 0x26
+#define LifeAndDeathID 0x27
+#define StarfallID 0x28
+#define SolarPrincessID 0x29
+#define TrampleID 0x2A
+#define ProdigyID 0x2B
+#define MagicGeneralID 0x2C
+#define PredictionID 0x2D
+#define SavageBlowID 0x2E
+#define IntimidateID 0x2F
+#define RenewalID 0x30
+#define KnighthoodID 0x31
+#define ImmortalID 0x32
+#define SchemingID 0x33
+#define ShadowgiftID 0x34
+#define LightningStrikeID 0x35
+#define ObstructID 0x36
+#define EldritchSecretsID 0x37
+#define RevengeanceID 0x38
+#define ReinforceID 0x39
+#define BowbreakerID 0x3A
+#define SunfallID 0x3B
+#define AttuneID 0x3C
+#define MentorID 0x3D
+#define BareEssentialsID 0x3E
+#define SwordSaintID 0x3F
+#define StarfallSwordID 0x40
+#define PowerOfGoldID 0x41
+#define WatersBlessingID 0x42
+#define SkyWarriorID 0x43
+#define CommanderSoulID 0x44
+#define NatureStormID 0x45
